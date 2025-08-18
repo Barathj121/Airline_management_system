@@ -1,0 +1,30 @@
+.seat-map {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.seat {
+  width: 50px;
+  height: 50px;
+  background-color: lightgray;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.seat.available {
+  background-color: lightgreen;
+}
+
+.seat.allocated {
+  background-color: red;
+  cursor: not-allowed;
+  color: white;
+  font-weight: bold;
+}
