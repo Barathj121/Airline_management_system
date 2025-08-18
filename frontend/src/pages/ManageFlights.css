@@ -95,109 +95,94 @@
   padding: 40px 20px;
 }
 
-.flights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 24px;
-}
-
-.flight-card {
+.flights-table {
   background: white;
   border-radius: 16px;
-  padding: 24px;
+  overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid transparent;
 }
 
-.flight-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  border-color: #3498db;
+.table-header {
+  display: grid;
+  grid-template-columns: 120px 1fr 150px 150px 100px 80px 120px 140px;
+  background: #34495e;
+  color: white;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  gap: 16px;
 }
 
-.flight-header {
-  display: flex;
-  justify-content: space-between;
+.table-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 150px 150px 100px 80px 120px 140px;
+  padding: 20px;
+  border-bottom: 1px solid #ecf0f1;
+  transition: background-color 0.3s ease;
+  gap: 16px;
   align-items: center;
-  margin-bottom: 16px;
+}
+
+.table-row:hover {
+  background-color: #f8f9fa;
+}
+
+.table-row:last-child {
+  border-bottom: none;
 }
 
 .flight-number {
-  font-size: 20px;
   font-weight: 700;
-  color: #2c3e50;
-}
-
-.flight-status {
-  padding: 4px 12px;
-  border-radius: 12px;
-  color: white;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.flight-route {
-  margin-bottom: 20px;
-}
-
-.route-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 12px;
-}
-
-.airport {
-  font-size: 18px;
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-.route-arrow {
-  font-size: 24px;
   color: #3498db;
+  font-family: 'Courier New', monospace;
 }
 
-.flight-details {
-  margin-bottom: 20px;
+.route-text {
+  font-weight: 600;
+  color: #2c3e50;
 }
 
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  padding: 8px 0;
-}
-
-.detail-row .label {
+.departure,
+.arrival {
   color: #7f8c8d;
   font-weight: 500;
+  font-size: 14px;
 }
 
-.detail-row .value {
+.capacity {
   color: #2c3e50;
   font-weight: 600;
 }
 
-.flight-actions {
+.price {
+  color: #27ae60;
+  font-weight: 700;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.actions {
   display: flex;
-  gap: 12px;
-  padding-top: 16px;
-  border-top: 1px solid #ecf0f1;
+  gap: 8px;
 }
 
 .edit-btn {
-  flex: 1;
   background: #3498db;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 12px;
   font-weight: 600;
   transition: background-color 0.3s ease;
 }
@@ -207,13 +192,13 @@
 }
 
 .delete-btn {
-  flex: 1;
   background: #e74c3c;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 12px;
   font-weight: 600;
   transition: background-color 0.3s ease;
 }
@@ -241,8 +226,78 @@
 }
 
 .empty-state p {
-  margin: 0;
+  margin: 0 0 16px 0;
   font-size: 16px;
+}
+
+.add-flight-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-flight-btn:hover {
+  background: #2980b9;
+}
+
+.search-input {
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .table-header,
+  .table-row {
+    grid-template-columns: 100px 1fr 120px 80px 140px;
+    gap: 12px;
+  }
+  
+  .table-header div:nth-child(3),
+  .table-header div:nth-child(4),
+  .table-header div:nth-child(5),
+  .table-row div:nth-child(3),
+  .table-row div:nth-child(4),
+  .table-row div:nth-child(5) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 120px 140px;
+    gap: 8px;
+  }
+  
+  .table-header div:nth-child(3),
+  .table-header div:nth-child(4),
+  .table-header div:nth-child(5),
+  .table-header div:nth-child(6),
+  .table-row div:nth-child(3),
+  .table-row div:nth-child(4),
+  .table-row div:nth-child(5),
+  .table-row div:nth-child(6) {
+    display: none;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 /* Responsive Design */
@@ -265,4 +320,24 @@
   .flight-actions {
     flex-direction: column;
   }
+}
+/* Sortable Header Styles */
+.table-header div {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 8px 4px;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.table-header div:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-header div:last-child {
+  cursor: default;
+}
+
+.table-header div:last-child:hover {
+  background-color: transparent;
 }

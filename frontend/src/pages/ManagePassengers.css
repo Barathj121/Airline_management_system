@@ -1,4 +1,4 @@
-/* Manage Passengers Styles */
+/* Manage Passengers Styles - Table Format */
 .manage-passengers {
   min-height: 100vh;
   background-color: #f5f7fa;
@@ -97,140 +97,154 @@
 
 .search-section {
   margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .search-box {
   position: relative;
+  flex: 1;
   max-width: 400px;
-  margin: 0 auto;
 }
 
 .search-input {
-  width: 100%;
-  padding: 12px 40px 12px 16px;
+  padding: 12px 16px;
   border: 2px solid #e1e5e9;
-  border-radius: 25px;
+  border-radius: 8px;
   font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
-  box-sizing: border-box;
 }
 
 .search-input:focus {
+  outline: none;
   border-color: #3498db;
 }
 
 .search-icon {
   position: absolute;
-  right: 16px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: #7f8c8d;
 }
 
-.passengers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 24px;
+.results-info {
+  color: #7f8c8d;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.passenger-card {
+.passengers-table {
   background: white;
   border-radius: 16px;
-  padding: 24px;
+  overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid transparent;
 }
 
-.passenger-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  border-color: #3498db;
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 120px 120px 120px 100px 180px;
+  background: #34495e;
+  color: white;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  gap: 16px;
 }
 
-.passenger-header {
+.sortable-header {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 4px;
+  border-radius: 4px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #f8f9fa;
+  gap: 4px;
+  user-select: none;
+}
+
+.sortable-header:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 120px 120px 120px 100px 180px;
+  padding: 20px;
+  border-bottom: 1px solid #ecf0f1;
+  transition: background-color 0.3s ease;
+  gap: 16px;
+  align-items: center;
+}
+
+.table-row:hover {
+  background-color: #f8f9fa;
+}
+
+.table-row:last-child {
+  border-bottom: none;
 }
 
 .passenger-name {
-  font-size: 18px;
   font-weight: 700;
   color: #2c3e50;
 }
 
-.passenger-id {
-  background: #e8f4fd;
+.email {
   color: #3498db;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.passenger-details {
-  margin-bottom: 20px;
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  padding: 6px 0;
-}
-
-.detail-row .label {
+.phone,
+.passport {
   color: #7f8c8d;
   font-weight: 500;
-  min-width: 100px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
 }
 
-.detail-row .value {
+.nationality {
   color: #2c3e50;
   font-weight: 600;
-  text-align: right;
-  word-break: break-word;
 }
 
-.passenger-actions {
+.bookings-count {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.actions {
   display: flex;
-  gap: 8px;
-  padding-top: 16px;
-  border-top: 1px solid #ecf0f1;
+  gap: 6px;
 }
 
 .view-btn {
-  flex: 1;
-  background: #95a5a6;
+  background: #27ae60;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 12px;
   font-weight: 600;
-  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
 .view-btn:hover {
-  background: #7f8c8d;
+  background: #229954;
 }
 
 .edit-btn {
-  flex: 1;
   background: #3498db;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 12px;
   font-weight: 600;
-  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
@@ -239,15 +253,14 @@
 }
 
 .delete-btn {
-  flex: 1;
   background: #e74c3c;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 12px;
   font-weight: 600;
-  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
@@ -274,7 +287,7 @@
 }
 
 .empty-state p {
-  margin: 0 0 20px 0;
+  margin: 0 0 16px 0;
   font-size: 16px;
 }
 
@@ -282,7 +295,7 @@
   background: #3498db;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 16px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
@@ -294,32 +307,82 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .search-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .search-box {
+    max-width: none;
+  }
+  
+  .results-info {
+    text-align: center;
+  }
+  
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 1fr 100px 140px;
+    gap: 12px;
+  }
+  
+  .table-header div:nth-child(4),
+  .table-header div:nth-child(5),
+  .table-header div:nth-child(6),
+  .table-row div:nth-child(4),
+  .table-row div:nth-child(5),
+  .table-row div:nth-child(6) {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
     gap: 16px;
   }
   
-  .passengers-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .passenger-header {
-    flex-direction: column;
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 140px;
     gap: 8px;
-    align-items: flex-start;
   }
   
-  .detail-row {
+  .table-header div:nth-child(3),
+  .table-header div:nth-child(4),
+  .table-header div:nth-child(5),
+  .table-header div:nth-child(6),
+  .table-row div:nth-child(3),
+  .table-row div:nth-child(4),
+  .table-row div:nth-child(5),
+  .table-row div:nth-child(6) {
+    display: none;
+  }
+  
+  .actions {
     flex-direction: column;
     gap: 4px;
   }
-  
-  .detail-row .value {
-    text-align: left;
-  }
-  
-  .passenger-actions {
-    flex-direction: column;
-  }
+}
+/* Sortable Header Styles */
+.table-header div {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 8px 4px;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.table-header div:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-header div:last-child {
+  cursor: default;
+}
+
+.table-header div:last-child:hover {
+  background-color: transparent;
 }
