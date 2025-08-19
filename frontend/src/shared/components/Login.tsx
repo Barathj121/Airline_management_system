@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { authAPI } from '../api/authAPI';
-import type { User } from '../data/dummyData';
+import { authAPI } from '../../api/authAPI';
+import type { User } from '../../data/dummyData';
 import './Login.css';
 
 interface LoginProps {

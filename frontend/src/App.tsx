@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login';
-import AdminDashboard from './components/AdminDashboard';
-import StaffDashboard from './components/StaffDashboard';
-import ManageFlights from './pages/ManageFlights';
-import ManageRoutes from './pages/ManageRoutes';
-import ManagePassengers from './pages/ManagePassengers';
+import Login from './shared/components/Login';
+import AdminDashboard from './admin/components/AdminDashboard';
+import StaffDashboard from './staff/components/StaffDashboard';
+import ManageFlights from './admin/pages/ManageFlights';
+import ManageRoutes from './admin/pages/ManageRoutes';
+import ManagePassengers from './admin/pages/ManagePassengers';
 import { authAPI } from './api/authAPI';
 import type { User } from './data/dummyData';
 import './App.css';

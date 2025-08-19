@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { routeAPI } from '../api/routeAPI';
-import RouteModal from '../components/modals/RouteModal';
-import type { Route } from '../data/dummyData';
+import { routeAPI } from '../../api/routeAPI';
+import RouteModal from '../modals/RouteModal';
+import type { Route } from '../../data/dummyData';
 import './ManageRoutes.css';
 
 const ManageRoutes: React.FC = () => {

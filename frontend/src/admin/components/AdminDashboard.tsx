@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authAPI } from '../api/authAPI';
-import type { User } from '../data/dummyData';
+import { authAPI } from '../../api/authAPI';
+import type { User } from '../../data/dummyData';
 import './AdminDashboard.css';
 
 interface AdminDashboardProps {

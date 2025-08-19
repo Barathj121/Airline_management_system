@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { flightAPI } from '../api/flightAPI';
-import FlightModal from '../components/modals/FlightModal';
-import type { Flight } from '../data/dummyData';
+import { flightAPI } from '../../api/flightAPI';
+import FlightModal from '../modals/FlightModal';
+import type { Flight } from '../../data/dummyData';
 import './ManageFlights.css';
 
 const ManageFlights: React.FC = () => {

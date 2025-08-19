@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { passengerAPI } from '../api/passengerAPI';
-import type { Passenger } from '../data/dummyData';
+import { passengerAPI } from '../../api/passengerAPI';
+import type { Passenger } from '../../data/dummyData';
 import './ManagePassengers.css';
 
 type SortField = 'firstName' | 'lastName' | 'email' | 'nationality' | 'bookings';

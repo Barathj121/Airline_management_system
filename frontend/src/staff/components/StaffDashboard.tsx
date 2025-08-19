@@ -1,6 +1,6 @@
 import React from 'react';
-import { authAPI } from '../api/authAPI';
-import type { User } from '../data/dummyData';
+import { authAPI } from '../../api/authAPI';
+import type { User } from '../../data/dummyData';
 import './StaffDashboard.css';
 
 interface StaffDashboardProps {
