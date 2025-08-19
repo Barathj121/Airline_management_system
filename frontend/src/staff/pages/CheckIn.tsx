@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import SeatMap from "../components/SeatMap";
+import "./CheckIn.css";
 
 type Passenger = {
   id: number;
@@ -36,31 +38,39 @@ function CheckIn() {
   };
 
   return (
-    <div>
+    <div className="checkin-container">
+      <Link to="/staff" className="back-button">← Back to Dashboard</Link>
       <h2>Check-In</h2>
       <h3>Passenger List</h3>
-      <ul>
+      <ul className="passenger-list">
         {passengers.map((passenger) => (
           <li key={passenger.id}>
-            <button
-              onClick={() => handleSelectPassenger(passenger)}
-              disabled={!!passengerSeatMap[passenger.id]}
-            >
-              {passenger.name}
-            </button>
-            {passengerSeatMap[passenger.id] && (
-              <span style={{ marginLeft: "10px", color: "green" }}>
-                Seat: {passengerSeatMap[passenger.id]}
-              </span>
-            )}
+            <span>{passenger.name}</span>
+            <div>
+              <button
+                className="passenger-button"
+                onClick={() => handleSelectPassenger(passenger)}
+                disabled={!!passengerSeatMap[passenger.id]}
+              >
+                {passengerSeatMap[passenger.id] ? 'Checked In' : 'Select for Check-In'}
+              </button>
+              {passengerSeatMap[passenger.id] && (
+                <span className="seat-assigned">
+                  Seat: {passengerSeatMap[passenger.id]}
+                </span>
+              )}
+            </div>
           </li>
         ))}
       </ul>
 
       {selectedPassenger && (
-        <p>
-          Assigning seat to: <strong>{selectedPassenger.name}</strong>
-        </p>
+        <div className="selected-passenger">
+          <p>
+            Assigning seat to: <strong>{selectedPassenger.name}</strong>
+          </p>
+          <p>Click on an available seat to assign</p>
+        </div>
       )}
 
       <SeatMap allocatedSeats={allocatedSeats} onSeatSelect={handleSeatAllocation} />

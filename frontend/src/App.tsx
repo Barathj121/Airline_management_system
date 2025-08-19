@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './shared/components/Login';
-import AdminDashboard from './admin/components/AdminDashboard';
-import StaffDashboard from './staff/components/StaffDashboard';
-import ManageFlights from './admin/pages/ManageFlights';
-import ManageRoutes from './admin/pages/ManageRoutes';
-import ManagePassengers from './admin/pages/ManagePassengers';
+import { Login } from './shared';
+import { AdminDashboard, ManageFlights, ManageRoutes, ManagePassengers } from './admin';
+import { StaffDashboard, CheckIn, InFlightServices } from './staff';
 import { authAPI } from './api/authAPI';
 import type { User } from './data/dummyData';
 import './App.css';
@@ -68,6 +65,8 @@ function App() {
                   path="/staff" 
                   element={<StaffDashboard user={user} onLogout={handleLogout} />} 
                 />
+                <Route path="/staff/checkin" element={<CheckIn />} />
+                <Route path="/staff/inflight-services" element={<InFlightServices />} />
                 <Route path="/" element={<Navigate to="/staff" replace />} />
               </>
             )}
