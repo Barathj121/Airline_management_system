@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { passengerAPI } from '../../api/passengerAPI';
+import PassengerModal from '../modals/PassengerModal';
 import type { Passenger } from '../../data/dummyData';
 import './ManagePassengers.css';
 
@@ -15,6 +16,8 @@ const ManagePassengers: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<SortField>('firstName');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingPassenger, setEditingPassenger] = useState<Passenger | null>(null);
 
   useEffect(() => {
     loadPassengers();
@@ -102,6 +105,44 @@ const ManagePassengers: React.FC = () => {
     setSortDirection(direction);
   };
 
+  const handleAddPassenger = () => {
+    setEditingPassenger(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEditPassenger = (passenger: Passenger) => {
+    setEditingPassenger(passenger);
+    setIsModalOpen(true);
+  };
+
+  const handleDeletePassenger = async (id: number) => {
+    if (window.confirm('Are you sure you want to delete this passenger?')) {
+      try {
+        const success = await passengerAPI.deletePassenger(id);
+        if (success) {
+          setPassengers(passengers.filter(passenger => passenger.id !== id));
+        } else {
+          setError('Failed to delete passenger');
+        }
+      } catch (err) {
+        setError('Failed to delete passenger');
+        console.error('Error deleting passenger:', err);
+      }
+    }
+  };
+
+  const handleSavePassenger = (savedPassenger: Passenger) => {
+    if (editingPassenger) {
+      // Update existing passenger
+      setPassengers(passengers.map(passenger => 
+        passenger.id === savedPassenger.id ? savedPassenger : passenger
+      ));
+    } else {
+      // Add new passenger
+      setPassengers([...passengers, savedPassenger]);
+    }
+  };
+
   const sortedPassengers = [...filteredPassengers].sort((a, b) => {
     const valueA = a[sortField];
     const valueB = b[sortField];
@@ -128,7 +169,7 @@ const ManagePassengers: React.FC = () => {
         <div className="header-content">
           <Link to="/admin" className="back-link">← Back to Dashboard</Link>
           <h1>Manage Passengers</h1>
-          <button className="add-btn">+ Add New Passenger</button>
+          <button className="add-btn" onClick={handleAddPassenger}>+ Add New Passenger</button>
         </div>
       </header>
 
@@ -152,6 +193,7 @@ const ManagePassengers: React.FC = () => {
             <div onClick={() => handleSort('email')}>Email{getSortIcon('email')}</div>
             <div onClick={() => handleSort('nationality')}>Nationality{getSortIcon('nationality')}</div>
             <div onClick={() => handleSort('bookings')}>Bookings{getSortIcon('bookings')}</div>
+            <div>Actions</div>
           </div>
           
           {sortedPassengers.map((passenger) => (
@@ -160,7 +202,21 @@ const ManagePassengers: React.FC = () => {
               <div>{passenger.lastName}</div>
               <div>{passenger.email}</div>
               <div>{passenger.nationality}</div>
-              <div>{passenger.bookings}</div>
+              <div>{passenger.bookings.length}</div>
+              <div className="actions">
+                <button 
+                  className="edit-btn"
+                  onClick={() => handleEditPassenger(passenger)}
+                >
+                  Edit
+                </button>
+                <button 
+                  className="delete-btn"
+                  onClick={() => handleDeletePassenger(passenger.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -181,6 +237,13 @@ const ManagePassengers: React.FC = () => {
           </div>
         )}
       </div>
+
+      <PassengerModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSavePassenger}
+        passenger={editingPassenger}
+      />
     </div>
   );
 };

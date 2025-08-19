@@ -144,7 +144,7 @@
 
 .table-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 120px 120px 120px 100px 180px;
+  grid-template-columns: 1fr 1fr 2fr 120px 100px 140px;
   background: #34495e;
   color: white;
   padding: 16px 20px;
@@ -152,6 +152,26 @@
   font-size: 14px;
   text-transform: uppercase;
   gap: 16px;
+}
+
+.table-header div {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 8px 4px;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.table-header div:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-header div:last-child {
+  cursor: default;
+}
+
+.table-header div:last-child:hover {
+  background-color: transparent;
 }
 
 .sortable-header {
@@ -171,7 +191,7 @@
 
 .table-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 120px 120px 120px 100px 180px;
+  grid-template-columns: 1fr 1fr 2fr 120px 100px 140px;
   padding: 20px;
   border-bottom: 1px solid #ecf0f1;
   transition: background-color 0.3s ease;
