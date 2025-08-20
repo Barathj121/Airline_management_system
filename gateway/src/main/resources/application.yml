@@ -1,0 +1,62 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: api-gateway
+
+  main:
+    web-application-type: reactive
+
+
+  cloud:
+    gateway:
+      default-filters:
+        - RemoveRequestHeader=Cookie
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin RETAIN_UNIQUE
+      routes:
+        - id: auth-service
+          predicates:
+            - Path=/auth/**
+          uri: http://localhost:9001
+          # If your auth controllers don't expect the /auth prefix at target, uncomment:
+          # filters:
+          #   - StripPrefix=1
+
+        - id: staff-checkin
+          predicates:
+            - Path=/checkin/**
+          uri: http://localhost:9002
+
+        - id: staff-inflight
+          predicates:
+            - Path=/inflight/**
+          uri: http://localhost:9002
+
+  web:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway
+  endpoint:
+    health:
+      show-details: when-authorized
+
+jwt:
+  # use the same secret/alg as your auth service
+  secret: "aVeryLongSecretKeyThatIsAtLeastSixtyFourCharactersLongAndRandom123456!"
+  allowedClockSkewSeconds: 60
+
+security:
+  public-paths: /auth/login,/auth/refresh,/actuator/**
+
+
+
+
