@@ -2,12 +2,13 @@ package com.oracle.inflight.controller;
 
 
 import com.oracle.inflight.entity.Booking;
+import com.oracle.inflight.entity.PassengerList;
 import com.oracle.inflight.entity.ServiceTransactions;
 import com.oracle.inflight.repository.BookingRepository;
-import com.oracle.inflight.repository.FlightRepository;
+import com.oracle.inflight.repository.PassengerListRepository;
 import com.oracle.inflight.repository.ServiceTransactionsRepository;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 //import java.util.List;
@@ -17,38 +18,32 @@ import org.springframework.web.bind.annotation.*;
 public class InFlightController {
     private final BookingRepository bookingRepository;
     private final ServiceTransactionsRepository serviceTransactionsRepository;
-    private final FlightRepository flightRepository;
+    private final PassengerListRepository passengerListRepository;
+
 
     public InFlightController(BookingRepository bookingRepository,
-                              ServiceTransactionsRepository serviceTransactionsRepository, FlightRepository flightRepository) {
+                              ServiceTransactionsRepository serviceTransactionsRepository, PassengerListRepository passengerListRepository) {
         this.bookingRepository = bookingRepository;
         this.serviceTransactionsRepository = serviceTransactionsRepository;
-        this.flightRepository = flightRepository;
+        this.passengerListRepository = passengerListRepository;
     }
 
-    // // ✅ GET all services for passengers of a flight
-    // @GetMapping("/flight/{flightId}/services")
-    // public List<ServiceTransactions> getServicesForFlight(@PathVariable Long flightId) {
-    //     // get all passengers of the flight
-    //     List<Booking> bookings = bookingRepository.findByFlightId(flightId);
-    //     return bookings.stream()
-    //             .flatMap(b -> serviceTransactionsRepository.findByPassengerId(b.getPassengerId()).stream())
-    //             .toList();
-    // }
-
-    @GetMapping("/flight/{flightId}/services")
-    public ResponseEntity<String> getServicesForFlight(@PathVariable Long flightId) {
-        return flightRepository.findById(flightId)
-                .map(flight -> ResponseEntity.ok(flight.getServices()))
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{id}/passengers")
+    public List<PassengerList> getPassengers(@PathVariable("id") Long flightId) {
+        return passengerListRepository.findByFlightId(flightId);
     }
-
 
     // ✅ POST add service transaction (ancillary / meals / shopping)
     @PostMapping("/add-service")
     public ServiceTransactions addService(@RequestBody ServiceTransactions transaction) {
         return serviceTransactionsRepository.save(transaction);
     }
+
+//     {
+//   "passengerId": 1,
+//   "serviceId": 1,
+//   "details": "{\"name\":\"Extra baggage\", \"amount\":2000}"
+// }
 
     // ✅ PUT change meal (already working, but kept here)
     @PutMapping("/change-meal")
@@ -59,12 +54,22 @@ public class InFlightController {
         return bookingRepository.save(booking);
     }
 
+//     {
+//   "bookingId": 1,
+//   "mealPref": "Non-Veg"
+// }
+
     // ✅ POST add shopping item
     @PostMapping("/add-shopping")
     public ServiceTransactions addShopping(@RequestBody ServiceTransactions transaction) {
         transaction.setServiceId(3L); // force it as shopping
         return serviceTransactionsRepository.save(transaction);
     }
+
+//     {
+//   "passengerId": 1,
+//   "details": "{\"item\":\"Perfume\", \"amount\":5000, \"quantity\":1}"
+// }
 
     // DTO for meal change
     public static class MealChangeRequest {

@@ -35,6 +35,11 @@ public class CheckInController {
         return bookingRepository.save(booking);
     }
 
+//     {
+//   "bookingId": 1,
+//   "seatNo": "12A"
+// }
+
     @PostMapping("/undo")
     public Booking undoSeatAssignment(@RequestBody Map<String, Object> request) {
         Long bookingId = Long.valueOf(request.get("bookingId").toString());
@@ -45,6 +50,10 @@ public class CheckInController {
         booking.setSeatNo(null);  // undo seat assignment
         return bookingRepository.save(booking);
 }
+
+// {
+//   "bookingId": 1
+// }
     @PutMapping("/change-seat")
     public Booking changeSeat(@RequestBody Map<String, Object> request) {
         Long bookingId = Long.valueOf(request.get("bookingId").toString());
@@ -56,6 +65,11 @@ public class CheckInController {
         booking.setSeatNo(newSeatNo);  // update seat number
         return bookingRepository.save(booking);
     }
+
+//     {
+//   "bookingId": 1,
+//   "seatNo": "15C"
+// }
 
 
 }
