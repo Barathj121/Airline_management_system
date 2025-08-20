@@ -1,7 +1,7 @@
 package com.oracle.airlinebackend.admin_service.service;
 
 import com.oracle.airlinebackend.admin_service.entity.Flight;
-import com.oracle.airlinebackend.admin_service.repository.FlightRepository;
+import com.oracle.airlinebackend.admin_service.repository.FlightRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,25 +12,25 @@ import java.util.Optional;
 public class FlightService {
 
     @Autowired
-    private FlightRepository flightRepository;
+    private FlightRepo flightRepo;
 
     // Create / Update
     public Flight saveFlight(Flight flight) {
-        return flightRepository.save(flight);
+        return flightRepo.save(flight);
     }
 
     // Read all
     public List<Flight> getAllFlights() {
-        return flightRepository.findAll();
+        return flightRepo.findAll();
     }
 
     // Read one
     public Optional<Flight> getFlightById(Long id) {
-        return flightRepository.findById(id);
+        return flightRepo.findById(id);
     }
 
     // Delete
     public void deleteFlight(Long id) {
-        flightRepository.deleteById(id);
+        flightRepo.deleteById(id);
     }
 }

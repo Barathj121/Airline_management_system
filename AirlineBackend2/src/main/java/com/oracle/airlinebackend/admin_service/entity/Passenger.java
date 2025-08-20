@@ -14,7 +14,47 @@ import java.time.LocalDate;
 @ToString
 public class Passenger {
 
-    @Id
+    public Long getPassId() {
+		return passId;
+	}
+
+	public void setPassId(Long passId) {
+		this.passId = passId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getDob() {
+		return dob;
+	}
+
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+
+	public String getPassport() {
+		return passport;
+	}
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Oracle sequence/identity support
     @Column(name = "pass_id")
     private Long passId;

@@ -18,7 +18,31 @@ public class Route {
     @Column(name = "ROUTE_ID")
     private Long routeId;
 
-    @NotBlank(message = "Arrival cannot be blank")
+    public Long getRouteId() {
+		return routeId;
+	}
+
+	public void setRouteId(Long routeId) {
+		this.routeId = routeId;
+	}
+
+	public String getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(String arrival) {
+		this.arrival = arrival;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	@NotBlank(message = "Arrival cannot be blank")
     @Column(name = "ARRIVAL", length = 100)
     private String arrival;
 
